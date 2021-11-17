@@ -6,7 +6,9 @@ Game::Game() :
     gScreenSurface{NULL},
     gXOut{NULL}
 {
-
+	player.addComponent(new HealthComponent());
+	hSystem.addEntity(player);
+	
 	//Initialize SDL
 	if( SDL_Init( SDL_INIT_VIDEO ) < 0 )
 	{
@@ -57,6 +59,7 @@ void Game::endGame()
 
 void Game::update()
 {
+	
    //Main loop flag
 	bool quit = false;
 	//Event handler
@@ -64,6 +67,7 @@ void Game::update()
 	//While application is running
 	while( !quit )
 	{
+		hSystem.update();
 		//Handle events on queue
 		while( SDL_PollEvent( &e ) != 0 )
 		{
